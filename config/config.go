@@ -14,7 +14,8 @@ type Config struct {
 	configs.HttpConfig
 	configs.LoggerConfig
 
-	Database configs.DatabaseConfig
+	Database   configs.DatabaseConfig
+	UptimeKuma configs.UptimeKumaConfig
 }
 
 var config Config
@@ -56,6 +57,10 @@ func loadVariables() (err error) {
 	config.Database.Database = os.Getenv("DATABASE_DATABASE")
 	config.Database.Username = os.Getenv("DATABASE_USERNAME")
 	config.Database.Password = os.Getenv("DATABASE_PASSWORD")
+
+	config.UptimeKuma.Uri = os.Getenv("UPTIMEKUMA_URI")
+	config.UptimeKuma.Username = os.Getenv("UPTIMEKUMA_USERNAME")
+	config.UptimeKuma.Password = os.Getenv("UPTIMEKUMA_PASSWORD")
 
 	return
 }
