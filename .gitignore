@@ -1,0 +1,40 @@
+# IntelliJ IDEA
+.idea/
+
+# Visual Studio Code
+.vscode/
+*~
+logs/
+*.log
+*.log.*
+*.code-workspace
+
+# Eclipse
+.classpath
+.project
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings
+.loadpath
+.recommenders
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# environment file
+.env
