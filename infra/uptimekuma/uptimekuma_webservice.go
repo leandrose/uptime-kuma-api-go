@@ -2,9 +2,11 @@ package uptimekuma
 
 import (
 	"context"
+	"encoding/json"
+	"github.com/leandrose/uptime-kuma-api-go/domain/entities"
 	"github.com/leandrose/uptime-kuma-api-go/domain/entities/configs"
 	"github.com/leandrose/uptime-kuma-api-go/domain/services"
-	"log"
+	"github.com/sirupsen/logrus"
 	"nhooyr.io/websocket"
 	"time"
 )
@@ -54,21 +56,54 @@ func (s uptimeKumaWebService) Consume(ctx context.Context) {
 			break
 		}
 
-		log.Println("Failed to reconnect:", err)
+		logrus.Infof("Failed to reconnect: %s", err)
 	}
 	s.conn = newConn
+	//go s.pong(ctx)
 
 	for {
 		msg, b, err := s.conn.Read(ctx)
 		if err != nil {
-			log.Println("Connection closed: ", err)
+			logrus.Infof("Connection closed: %s", err)
 			break
 		}
 
 		// PROCESSAR
-		log.Printf("READ msg: %s", msg)
-		log.Printf("READ b: %s", string(b))
+		bb := string(b[0])
+		logrus.Debugf("bb: %+v", string(b[0]))
+		switch bb {
+		case "0":
+			var item entities.UptimeKumaWebService
+			err = json.Unmarshal(b[1:], &item)
+			if err != nil {
+				logrus.Errorf("Error unmarshal: %s", err)
+				break
+			}
+			logrus.Debugf("Received: %+v", item)
+			break
+		case "2":
+			logrus.Infof("PONG")
+			_ = s.Write(ctx, websocket.MessageText, []byte("3"))
+			break
+		}
+		logrus.Debugf("READ msg: %s", msg)
+		logrus.Debugf("READ b: %s", string(b))
 	}
 
+	//s.cancel()
 	go s.Consume(ctx)
+}
+
+func (s *uptimeKumaWebService) pong(ctx context.Context) {
+	select {
+	case <-time.After(25 * time.Second):
+		_ = s.conn.Write(ctx, websocket.MessageText, []byte("3"))
+		break
+	case <-ctx.Done():
+		return
+	}
+}
+
+func (s uptimeKumaWebService) Write(ctx context.Context, messageType websocket.MessageType, b []byte) (err error) {
+	return s.conn.Write(ctx, messageType, b)
 }
