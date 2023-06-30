@@ -2,7 +2,7 @@ package providers
 
 import (
 	"github.com/golobby/container/v3"
-	"github.com/leandrose/uptime-kuma-api-go/domain/services"
+	uptimekuma2 "github.com/leandrose/uptime-kuma-api-go/domain/services/uptimekuma"
 	"github.com/leandrose/uptime-kuma-api-go/infra/uptimekuma"
 )
 
@@ -12,7 +12,7 @@ func LoadProviders() {
 	//	return databases.NewDatabase(config.GetConfig().Database)
 	//})
 	// UPTIME KUMA
-	_ = container.Singleton(func() *services.IUptimeKuma {
-		return uptimekuma.GetInstanceUptimeKuma()
+	_ = container.Singleton(func() *uptimekuma2.IUptimeKumaService {
+		return uptimekuma.NewUptimeKumaService()
 	})
 }
