@@ -83,6 +83,12 @@ func (s *uptimekumaService) DeleteMonitor(monitorId int) error {
 	if _, ok := s.monitors[monitorId]; ok {
 		delete(s.monitors, monitorId)
 	}
+	if _, ok := s.avgPing[monitorId]; ok {
+		delete(s.avgPing, monitorId)
+	}
+	if _, ok := s.uptimes[monitorId]; ok {
+		delete(s.uptimes, monitorId)
+	}
 	return nil
 }
 

@@ -13,4 +13,7 @@ type IUptimeKumaService interface {
 	// PING
 	GetPing(int) (*int, error)
 	GetPings() map[int]int
+	// UPTIMES
+	GetUptime(int) (*[]entities.Uptime, error)
+	GetUptimes() []entities.Uptime
 }

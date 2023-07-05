@@ -12,6 +12,12 @@ type UptimeKumaInfo struct {
 	ServerTimezoneOffset string  `json:"serverTimezoneOffset"`
 }
 
+type Uptime struct {
+	ID       int     `json:"id"`
+	Duration int     `json:"duration"`
+	Uptime   float64 `json:"uptime"`
+}
+
 type Login struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

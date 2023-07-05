@@ -21,6 +21,7 @@ type uptimekumaService struct {
 	sid      string
 	monitors map[int]entities.Monitor
 	avgPing  map[int]int
+	uptimes  map[int]map[int]float64
 
 	chanAuth chan bool
 }
@@ -44,6 +45,7 @@ func NewUptimeKumaService() *uptimekuma.IUptimeKumaService {
 			"sid":         instance.OnSid,
 			"avgPing":     instance.OnAvgPing,
 			"monitorList": instance.OnMonitorList,
+			"uptime":      instance.OnUptime,
 		},
 		cancel: cancel,
 		log: logrus.WithFields(logrus.Fields{

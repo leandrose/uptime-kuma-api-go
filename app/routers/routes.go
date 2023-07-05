@@ -23,4 +23,7 @@ func LoadRouters(e *echo.Echo) {
 	// AVG PING
 	e.GET("/pings", handlers.PingsHandle)
 	e.GET("/ping/:monitor_id", handlers.PingHandle)
+	// UPTIME
+	e.GET("/uptimes", handlers.UptimesHandle)
+	e.GET("/uptime/:monitor_id", handlers.UptimeHandle)
 }
