@@ -10,6 +10,16 @@ import (
 	"strconv"
 )
 
+func MonitorsHandle(c echo.Context) error {
+	var service uptimekuma.IUptimeKumaService
+	err := container.Resolve(&service)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	return http.MonitorsPresenter(c.Response(), service.GetMonitors())
+}
+
 func MonitorGetByIdHandle(c echo.Context) error {
 	monitorId, err := strconv.Atoi(c.Param("monitor_id"))
 	if err != nil {
