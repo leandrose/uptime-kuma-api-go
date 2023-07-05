@@ -17,8 +17,9 @@ type uptimekumaService struct {
 	cancel context.CancelFunc
 	config configs.UptimeKumaConfig
 
-	info entities.UptimeKumaInfo
-	sid  string
+	info     entities.UptimeKumaInfo
+	sid      string
+	monitors map[int]entities.Monitor
 
 	chanAuth chan bool
 }
@@ -38,9 +39,9 @@ func NewUptimeKumaService() *uptimekuma.IUptimeKumaService {
 	socket = &uptimeKumaWebSocket{
 		config: configUptimeKuma,
 		handles: map[string]uptimekuma.Handle{
-			"info": instance.OnInfo,
-			"sid":  instance.OnSid,
-			//"monitorList": instance.OnMonitorList,
+			"info":        instance.OnInfo,
+			"sid":         instance.OnSid,
+			"monitorList": instance.OnMonitorList,
 		},
 		cancel: cancel,
 		log: logrus.WithFields(logrus.Fields{
@@ -80,10 +81,6 @@ func (s *uptimekumaService) OnInfo(args ...interface{}) {
 func (s *uptimekumaService) OnSid(args ...interface{}) {
 	s.sid = args[0].(string)
 	logrus.Debugf("OnSid: %+v", s.sid)
-}
-
-func (s *uptimekumaService) OnMonitorList(msg string) {
-	logrus.Debugf("OnMonitorList: %s", msg)
 }
 
 func (s *uptimekumaService) Auth() bool {

@@ -19,71 +19,97 @@ type Login struct {
 }
 
 type Event struct {
-	Ok    bool    `json:"ok"`
-	Token *string `json:"token,omitempty"`
-	Msg   *string `json:"msg,omitempty"`
+	Ok        bool    `json:"ok"`
+	Token     *string `json:"token,omitempty"`
+	Msg       *string `json:"msg,omitempty"`
+	MonitorId *int    `json:"monitorId,omitempty"`
+}
+
+func NewMonitor() Monitor {
+	return Monitor{
+		Active:              true,
+		Interval:            60,
+		Maxretries:          1,
+		IgnoreTls:           false,
+		UpsideDown:          false,
+		Maxredirects:        10,
+		DnsResolveType:      "A",
+		DnsResolveServer:    "1.1.1.1",
+		RetryInterval:       60,
+		Method:              "GET",
+		DockerContainer:     "",
+		ExpiryNotification:  false,
+		ResendInterval:      0,
+		PacketSize:          56,
+		HttpBodyEncoding:    "json",
+		AcceptedStatuscodes: []string{"200-299"},
+		MqttUsername:        "",
+		MqttPassword:        "",
+		MqttTopic:           "",
+		MqttSuccessMessage:  "",
+	}
 }
 
 type Monitor struct {
-	ID *int `json:"id,omitempty"`
-	//notificationIDList	{}
-	//tags	[]
+	ID                 *int         `json:"id,omitempty"`
+	NotificationIDList map[int]bool `json:"notificationIDList"`
+	//Tags                     []Tags               `json:"tags,omitempty"`
 	Name                     string   `json:"name"`
-	Active                   bool     `json:"active" default:"1"`
-	Interval                 int      `json:"interval" default:"20"`
-	Url                      *string  `json:"url"`
+	Active                   bool     `json:"active"`
+	Interval                 int      `json:"interval"`
+	Url                      *string  `json:"url,omitempty"`
 	Type                     string   `json:"type"`
-	Weight                   int      `json:"weight" default:"2000"`
-	Hostname                 string   `json:"hostname"`
-	Port                     int      `json:"port"`
-	CreatedDate              string   `json:"created_date"`
-	Keyword                  *string  `json:"keyword"`
-	Maxretries               int      `json:"maxretries" default:"1"`
-	IgnoreTls                bool     `json:"ignore_tls" default:"0"`
-	UpsideDown               bool     `json:"upside_down" default:"0"`
-	Maxredirects             int      `json:"maxredirects" default:"10"`
+	Weight                   *int     `json:"weight,omitempty"`
+	Hostname                 *string  `json:"hostname,omitempty"`
+	Port                     *int     `json:"port,omitempty"`
+	CreatedDate              *string  `json:"createdDate,omitempty"`
+	Keyword                  *string  `json:"keyword,omitempty"`
+	Maxretries               int      `json:"maxretries"`
+	IgnoreTls                bool     `json:"ignoreTls"`
+	UpsideDown               bool     `json:"upsideDown"`
+	Maxredirects             int      `json:"maxredirects"`
 	AcceptedStatuscodes      []string `json:"accepted_statuscodes"`
-	DnsResolveType           string   `json:"dns_resolve_type" default:"A"`
-	DnsResolveServer         string   `json:"dns_resolve_server" default:"1.1.1.1"`
-	DnsLastResult            *string  `json:"dns_last_result"`
-	RetryInterval            int      `json:"retry_interval" default:"0"`
-	PushToken                *string  `json:"push_token"`
-	Method                   string   `json:"METHOD" default:"GET"`
-	Body                     *string  `json:"BODY"`
-	Headers                  *string  `json:"headers"`
-	BasicAuthUser            *string  `json:"basic_auth_user"`
-	BasicAuthPass            *string  `json:"basic_auth_pass"`
+	DnsResolveType           string   `json:"dns_resolve_type"`
+	DnsResolveServer         string   `json:"dns_resolve_server"`
+	DnsLastResult            *string  `json:"dns_last_result,omitempty"`
+	RetryInterval            int      `json:"retryInterval"`
+	PushToken                *string  `json:"pushToken,omitempty"`
+	Method                   string   `json:"method"`
+	Body                     *string  `json:"body,omitempty"`
+	Headers                  *string  `json:"headers,omitempty"`
+	BasicAuthUser            *string  `json:"basicAuthUser,omitempty"`
+	BasicAuthPass            *string  `json:"basicAuthPass,omitempty"`
 	DockerHost               *int     `json:"docker_host"`
-	DockerContainer          string   `json:"docker_container" default:""`
-	ProxyId                  int      `json:"proxy_id"`
-	ExpiryNotification       bool     `json:"expiry_notification" default:"1"`
-	MqttTopic                *string  `json:"mqtt_topic"`
-	MqttSuccessMessage       *string  `json:"mqtt_success_message"`
-	MqttUsername             *string  `json:"mqtt_username"`
-	MqttPassword             *string  `json:"mqtt_password"`
-	DatabaseConnectionString *string  `json:"database_connection_string"`
-	DatabaseQuery            *string  `json:"database_query"`
-	AuthMethod               string   `json:"auth_method" default:""`
-	AuthDomain               *string  `json:"auth_domain"`
-	AuthWorkstation          *string  `json:"auth_workstation"`
-	GrpcUrl                  *string  `json:"grpc_url"`
-	GrpcProtobuf             *string  `json:"grpc_protobuf"`
-	GrpcBody                 *string  `json:"grpc_body"`
-	GrpcMetadata             *string  `json:"grpc_metadata"`
-	GrpcMethod               *string  `json:"grpc_method"`
-	GrpcServiceName          *string  `json:"grpc_service_name"`
-	GrpcEnableTls            bool     `json:"grpc_enable_tls" default:"0"`
-	RadiusUsername           *string  `json:"radius_username"`
-	RadiusPassword           *string  `json:"radius_password"`
-	RadiusCallingStationId   *string  `json:"radius_calling_station_id"`
-	RadiusCalledStationId    *string  `json:"radius_called_station_id"`
-	RadiusSecret             *string  `json:"radius_secret"`
-	ResendInterval           int      `json:"resend_interval" default:"0"`
-	PacketSize               int      `json:"packet_size" default:"56"`
-	Game                     *string  `json:"game"`
-	HttpBodyEncoding         string   `json:"http_body_encoding" default:"json"`
-	Description              *string  `json:"description"`
-	TlsCa                    *string  `json:"tls_ca"`
-	TlsCert                  *string  `json:"tls_cert"`
-	TlsKey                   *string  `json:"tls_key"`
+	DockerContainer          string   `json:"docker_container"`
+	ProxyId                  *int     `json:"proxyId"`
+	ExpiryNotification       bool     `json:"expiryNotification"`
+	MqttTopic                string   `json:"mqttTopic"`
+	MqttSuccessMessage       string   `json:"mqttSuccessMessage"`
+	MqttUsername             string   `json:"mqttUsername"`
+	MqttPassword             string   `json:"mqttPassword"`
+	DatabaseConnectionString *string  `json:"databaseConnectionString,omitempty"`
+	DatabaseQuery            *string  `json:"databaseQuery,omitempty"`
+	AuthMethod               *string  `json:"authMethod"`
+	AuthDomain               *string  `json:"authDomain,omitempty"`
+	AuthWorkstation          *string  `json:"authWorkstation,omitempty"`
+	GrpcUrl                  *string  `json:"grpcUrl,omitempty"`
+	GrpcProtobuf             *string  `json:"grpcProtobuf,omitempty"`
+	GrpcBody                 *string  `json:"grpcBody,omitempty"`
+	GrpcMetadata             *string  `json:"grpcMetadata,omitempty"`
+	GrpcMethod               *string  `json:"grpcMethod,omitempty"`
+	GrpcServiceName          *string  `json:"grpcServiceName,omitempty"`
+	GrpcEnableTls            *bool    `json:"grpcEnableTls,omitempty"`
+	RadiusUsername           *string  `json:"radiusUsername,omitempty"`
+	RadiusPassword           *string  `json:"radiusPassword,omitempty"`
+	RadiusCallingStationId   *string  `json:"radiusCallingStationId,omitempty"`
+	RadiusCalledStationId    *string  `json:"radiusCalledStationId,omitempty"`
+	RadiusSecret             *string  `json:"radiusSecret,omitempty"`
+	ResendInterval           int      `json:"resendInterval"`
+	PacketSize               int      `json:"packetSize"`
+	Game                     *string  `json:"game,omitempty"`
+	HttpBodyEncoding         string   `json:"httpBodyEncoding"`
+	Description              *string  `json:"description,omitempty"`
+	TlsCa                    *string  `json:"tlsCa,omitempty"`
+	TlsCert                  *string  `json:"tlsCert,omitempty"`
+	TlsKey                   *string  `json:"tlsKey,omitempty"`
 }

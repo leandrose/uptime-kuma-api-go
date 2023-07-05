@@ -12,7 +12,7 @@ func LoadProviders() {
 	//	return databases.NewDatabase(config.GetConfig().Database)
 	//})
 	// UPTIME KUMA
-	_ = container.Singleton(func() *uptimekuma2.IUptimeKumaService {
-		return uptimekuma.NewUptimeKumaService()
+	_ = container.Singleton(func() uptimekuma2.IUptimeKumaService {
+		return *uptimekuma.NewUptimeKumaService()
 	})
 }
