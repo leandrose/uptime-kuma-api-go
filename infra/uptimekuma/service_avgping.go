@@ -25,7 +25,7 @@ func (s *uptimekumaService) OnAvgPing(args ...interface{}) {
 	logrus.Tracef("OnAvgPing: %+v", s.monitors)
 }
 
-func (s *uptimekumaService) GetPing(monitorID int) (*int, error) {
+func (s *uptimekumaService) GetAvgPing(monitorID int) (*int, error) {
 	if i, ok := s.avgPing[monitorID]; ok {
 		return &i, nil
 	}
@@ -33,7 +33,7 @@ func (s *uptimekumaService) GetPing(monitorID int) (*int, error) {
 	return nil, errors.New("avg ping not found")
 }
 
-func (s *uptimekumaService) GetPings() map[int]int {
+func (s *uptimekumaService) GetAvgPings() map[int]int {
 	if s.avgPing == nil {
 		s.avgPing = map[int]int{}
 	}
