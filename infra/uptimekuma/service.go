@@ -20,6 +20,7 @@ type uptimekumaService struct {
 	info     entities.UptimeKumaInfo
 	sid      string
 	monitors map[int]entities.Monitor
+	avgPing  map[int]int
 
 	chanAuth chan bool
 }
@@ -41,6 +42,7 @@ func NewUptimeKumaService() *uptimekuma.IUptimeKumaService {
 		handles: map[string]uptimekuma.Handle{
 			"info":        instance.OnInfo,
 			"sid":         instance.OnSid,
+			"avgPing":     instance.OnAvgPing,
 			"monitorList": instance.OnMonitorList,
 		},
 		cancel: cancel,

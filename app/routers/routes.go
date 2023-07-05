@@ -20,4 +20,7 @@ func LoadRouters(e *echo.Echo) {
 	em.GET("", handlers.MonitorGetByIdHandle)
 	em.DELETE("", handlers.MonitorDeleteHandle)
 	em.PATCH("", handlers.MonitorEditHandle)
+	// AVG PING
+	e.GET("/pings", handlers.PingsHandle)
+	e.GET("/ping/:monitor_id", handlers.PingHandle)
 }
