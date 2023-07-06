@@ -29,6 +29,14 @@ type Event struct {
 	Token     *string `json:"token,omitempty"`
 	Msg       *string `json:"msg,omitempty"`
 	MonitorId *int    `json:"monitorId,omitempty"`
+	Tag       *Tag    `json:"tag"`
+	Tags      *[]Tag  `json:"tags"`
+}
+
+type Tag struct {
+	ID    *int   `json:"id"`
+	Name  string `json:"name"`
+	Color string `json:"color"`
 }
 
 func NewMonitor() Monitor {

@@ -14,10 +14,10 @@ service. It is built using the Go programming language (Golang).
 
 | Resource                   | Method | Support? |
 |----------------------------|--------|----------|
-| - Ping Average             |        | [-]      |
+| - Ping Average             |        | [X]      |
 | Get Ping Average           | GET    | [X]      |
 | Get Ping Average           | GET    | [X]      |
-| - Uptime                   |        | [-]      |
+| - Uptime                   |        | [X]      |
 | Get Uptime                 | GET    | [X]      |
 | Get Uptimes                | GET    | [X]      |
 | - Heartbeat List           |        | [-]      |
@@ -65,11 +65,11 @@ service. It is built using the Go programming language (Golang).
 | Unpin Incident             | DELETE | [ ]      |
 | - Cert Info                |        | [-]      |
 | Get Cert Info              | GET    | [ ]      |
-| - Tags                     |        | [-]      |
-| Get Tags                   | GET    | [ ]      |
-| Add Tag                    | POST   | [ ]      |
-| Get Tag                    | GET    | [ ]      |
-| Delete Tag                 | DELETE | [ ]      |
+| - Tags                     |        | [X]      |
+| Get Tags                   | GET    | [X]      |
+| Add Tag                    | POST   | [X]      |
+| Get Tag                    | GET    | [X]      |
+| Delete Tag                 | DELETE | [X]      |
 
 # Contributing
 

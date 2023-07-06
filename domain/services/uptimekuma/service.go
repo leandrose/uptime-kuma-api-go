@@ -16,4 +16,10 @@ type IUptimeKumaService interface {
 	// UPTIMES
 	GetUptime(int) (*[]entities.Uptime, error)
 	GetUptimes() []entities.Uptime
+	// TAGS
+	GetTag(int) (*entities.Tag, error)
+	GetTags() (*[]entities.Tag, error)
+	CreateTag(entities.Tag) (*entities.Tag, error)
+	UpdateTag(tag entities.Tag) (*entities.Tag, error)
+	DeleteTag(int) error
 }
