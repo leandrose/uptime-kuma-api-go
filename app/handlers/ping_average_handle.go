@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func AvgPingHandle(c echo.Context) error {
+func PingAverageHandle(c echo.Context) error {
 	var service uptimekuma.IUptimeKumaService
 	err := container.Resolve(&service)
 	if err != nil {
@@ -21,7 +21,7 @@ func AvgPingHandle(c echo.Context) error {
 		return http.Error400Presenter(c.Response(), err)
 	}
 
-	ping, err := service.GetAvgPing(monitorID)
+	ping, err := service.GetPingAverage(monitorID)
 	if err != nil {
 		return http.Error404Presenter(c.Response(), err)
 	}
@@ -29,14 +29,14 @@ func AvgPingHandle(c echo.Context) error {
 	return http.PingPresenter(c.Response(), monitorID, *ping)
 }
 
-func AvgPingsHandle(c echo.Context) error {
+func PingsAverageHandle(c echo.Context) error {
 	var service uptimekuma.IUptimeKumaService
 	err := container.Resolve(&service)
 	if err != nil {
 		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
 	}
 
-	pings := service.GetAvgPings()
+	pings := service.GetPingsAverage()
 
 	return http.PingsPresenter(c.Response(), pings)
 }

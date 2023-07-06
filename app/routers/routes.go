@@ -21,8 +21,8 @@ func LoadRouters(e *echo.Echo) {
 	em.DELETE("", handlers.MonitorDeleteHandle)
 	em.PATCH("", handlers.MonitorEditHandle)
 	// AVG PING
-	e.GET("/avg_pings", handlers.AvgPingsHandle)
-	e.GET("/avg_ping/:monitor_id", handlers.AvgPingHandle)
+	e.GET("/pings_average", handlers.PingsAverageHandle)
+	e.GET("/ping_average/:monitor_id", handlers.PingAverageHandle)
 	// UPTIME
 	e.GET("/uptimes", handlers.UptimesHandle)
 	e.GET("/uptime/:monitor_id", handlers.UptimeHandle)
