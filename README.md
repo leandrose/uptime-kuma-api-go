@@ -34,14 +34,12 @@ service. It is built using the Go programming language (Golang).
 
 | Resource   | Method | Support? |
 |------------|--------|----------|
-| Heartbeat  | GET    | ❌        |
-| Heartbeats | GET    | ❌        |
+| Heartbeats | GET    | ✅️       |
 
 ## Important Heartbeat List
 
 | Resource             | Method | Support? |
 |----------------------|--------|----------|
-| Important Heartbeat  | GET    | ❌        |
 | Important Heartbeats | GET    | ❌        |
 
 ## Info
@@ -83,9 +81,9 @@ service. It is built using the Go programming language (Golang).
 
 | Resource            | Method | Support? |
 |---------------------|--------|----------|
-| Get Notifications   | GET    | ✅️        |
-| Create Notification | GET    | ✅️        |
-| Delete Notification | GET    | ✅️        |
+| Get Notifications   | GET    | ✅️       |
+| Create Notification | GET    | ✅️       |
+| Delete Notification | GET    | ✅️       |
 
 ## Ping Average
 

@@ -22,6 +22,7 @@ func LoadRouters(e *echo.Echo) {
 	em.PATCH("", handlers.MonitorEditHandle)
 	em.PATCH("/resume", handlers.MonitorResumeHandle)
 	em.PATCH("/pause", handlers.MonitorPauseHandle)
+	em.GET("/heartbeats", handlers.MonitorHeartbeatsGetHandle)
 	emt := em.Group("/tag/:tag_id")
 	emt.POST("", handlers.MonitorTagAddHandle)
 	emt.DELETE("", handlers.MonitorTagDeleteHandle)

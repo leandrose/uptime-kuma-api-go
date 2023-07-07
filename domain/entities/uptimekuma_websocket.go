@@ -40,6 +40,18 @@ type Tag struct {
 	Color string `json:"color"`
 }
 
+type Heartbeat struct {
+	Id        int    `json:"id"`
+	Important int    `json:"important"`
+	MonitorId int    `json:"monitor_id"`
+	Status    int    `json:"status"`
+	Msg       string `json:"msg"`
+	Time      string `json:"time"`
+	Ping      int    `json:"ping"`
+	Duration  int    `json:"duration"`
+	DownCount int    `json:"down_count"`
+}
+
 type Notification struct {
 	Id        *int   `json:"id"`
 	Name      string `json:"name"`

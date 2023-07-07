@@ -4,6 +4,8 @@ import "github.com/leandrose/uptime-kuma-api-go/domain/entities"
 
 type IUptimeKumaService interface {
 	Auth() bool
+	// HEARTBEAT
+	GetMonitorHeartbets(int) []entities.Heartbeat
 	// MONITOR
 	GetMonitors() []entities.Monitor
 	GetMonitorById(id int) (*entities.Monitor, error)
