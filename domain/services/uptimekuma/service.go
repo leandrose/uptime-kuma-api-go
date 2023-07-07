@@ -10,6 +10,8 @@ type IUptimeKumaService interface {
 	CreateMonitor(monitor entities.Monitor) (*entities.Monitor, error)
 	DeleteMonitor(monitorId int) error
 	EditMonitor(monitor entities.Monitor) (*entities.Monitor, error)
+	ResumeMonitor(int) error
+	PauseMonitor(int) error
 	// PING
 	GetPingAverage(int) (*int, error)
 	GetPingsAverage() map[int]int

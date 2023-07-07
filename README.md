@@ -65,8 +65,8 @@ service. It is built using the Go programming language (Golang).
 | Get Monitor        | GET    | ✅️      |
 | Delete Monitor     | DELETE | ✅️      |
 | Update Monitor     | PATCH  | ✅️      |
-| Pause Monitor      | PATCH  | ❌      |
-| Resume Monitor     | PATCH  | ❌      |
+| Pause Monitor      | PATCH  | ✅️      |
+| Resume Monitor     | PATCH  | ✅️      |
 | Monitor Beats      | GET    | ❌      |
 | Add Tag Monitor    | POST   | ❌      |
 | Remove Tag Monitor | DELETE | ❌      |

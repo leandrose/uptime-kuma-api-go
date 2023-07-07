@@ -106,3 +106,43 @@ func MonitorDeleteHandle(c echo.Context) error {
 
 	return http.SuccessPresenter(c.Response())
 }
+
+func MonitorPauseHandle(c echo.Context) error {
+	monitorId, err := strconv.Atoi(c.Param("monitor_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	err = container.Resolve(&service)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	err = service.PauseMonitor(monitorId)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}
+
+func MonitorResumeHandle(c echo.Context) error {
+	monitorId, err := strconv.Atoi(c.Param("monitor_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	err = container.Resolve(&service)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	err = service.ResumeMonitor(monitorId)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}

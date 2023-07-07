@@ -122,3 +122,58 @@ func (s *uptimekumaService) EditMonitor(monitor entities.Monitor) (*entities.Mon
 	}
 	return mm, nil
 }
+
+func (s *uptimekumaService) ResumeMonitor(monitorID int) error {
+	// 426["resumeMonitor",3]
+	// 436[{"ok":true,"msg":"Resumed Successfully."}]
+	log := logrus.WithField("func", "ResumeMonitor")
+	m := []interface{}{
+		"resumeMonitor",
+		monitorID,
+	}
+	b, _ := json.Marshal(m)
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Error("error: %s", err)
+		return err
+	}
+
+	select {
+	case ok := <-c:
+		if ok.Ok {
+			return nil
+		}
+	case <-time.After(5 * time.Second):
+		log.Errorf("expired request monitor=%s", monitorID)
+		return errors.New("expired request")
+	}
+
+	return errors.New("error occurred")
+}
+func (s *uptimekumaService) PauseMonitor(monitorID int) error {
+	// 425["pauseMonitor",3]
+	// 435[{"ok":true,"msg":"Paused Successfully."}]
+	log := logrus.WithField("func", "PauseMonitor")
+	m := []interface{}{
+		"pauseMonitor",
+		monitorID,
+	}
+	b, _ := json.Marshal(m)
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Error("error: %s", err)
+		return err
+	}
+
+	select {
+	case ok := <-c:
+		if ok.Ok {
+			return nil
+		}
+	case <-time.After(5 * time.Second):
+		log.Errorf("expired request monitor=%s", monitorID)
+		return errors.New("expired request")
+	}
+
+	return errors.New("error occurred")
+}
