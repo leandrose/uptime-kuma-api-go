@@ -25,7 +25,12 @@ func LoadRouters(e *echo.Echo) {
 	emt := em.Group("/tag/:tag_id")
 	emt.POST("", handlers.MonitorTagAddHandle)
 	emt.DELETE("", handlers.MonitorTagDeleteHandle)
-	// AVG PING
+	// NOTIFICATIONS
+	e.GET("/notifications", handlers.NotificationsGetHandle)
+	e.POST("/notifications", handlers.NotificationCreateHandle)
+	e.PUT("/notifications", handlers.NotificationCreateHandle)
+	e.DELETE("/notifications/:notification_id", handlers.NotificationDeleteHandle)
+	// PING AVERAGE
 	e.GET("/pings_average", handlers.PingsAverageHandle)
 	e.GET("/ping_average/:monitor_id", handlers.PingAverageHandle)
 	// UPTIME

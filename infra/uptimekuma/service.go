@@ -17,11 +17,12 @@ type uptimekumaService struct {
 	cancel context.CancelFunc
 	config configs.UptimeKumaConfig
 
-	info     entities.UptimeKumaInfo
-	sid      string
-	monitors map[int]entities.Monitor
-	avgPing  map[int]int
-	uptimes  map[int]map[int]float64
+	info          entities.UptimeKumaInfo
+	sid           string
+	monitors      map[int]entities.Monitor
+	avgPing       map[int]int
+	uptimes       map[int]map[int]float64
+	notifications []entities.Notification
 
 	chanAuth chan bool
 }
@@ -41,11 +42,12 @@ func NewUptimeKumaService() *uptimekuma.IUptimeKumaService {
 	socket = &uptimeKumaWebSocket{
 		config: configUptimeKuma,
 		handles: map[string]uptimekuma.Handle{
-			"info":        instance.OnInfo,
-			"sid":         instance.OnSid,
-			"avgPing":     instance.OnAvgPing,
-			"monitorList": instance.OnMonitorList,
-			"uptime":      instance.OnUptime,
+			"info":             instance.OnInfo,
+			"sid":              instance.OnSid,
+			"avgPing":          instance.OnAvgPing,
+			"monitorList":      instance.OnMonitorList,
+			"uptime":           instance.OnUptime,
+			"notificationList": instance.OnNotificationList,
 		},
 		cancel: cancel,
 		log: logrus.WithFields(logrus.Fields{
@@ -67,8 +69,7 @@ func (s *uptimekumaService) fill(old interface{}, new interface{}) error {
 		return err
 	}
 
-	err = json.Unmarshal(b, &new)
-	return nil
+	return json.Unmarshal(b, &new)
 }
 
 func (s *uptimekumaService) OnInfo(args ...interface{}) {

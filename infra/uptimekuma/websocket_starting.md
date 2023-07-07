@@ -61,3 +61,18 @@
 # monitor remove tag
 4213["deleteMonitorTag",1,10,""]
 4313[{"ok":true,"msg":"Deleted Successfully."}]
+
+# Notification
+423["addNotification",{"name":"My Webhook Alert (1)","type":"webhook","isDefault":false,"webhookURL":"https://sistema.smsnet.com.br/webhook/uptimekuma","webhookContentType":"json"},null]
+42["notificationList",[{"id":1,"name":"My Webhook Alert (1)","config":"{\"name\":\"My Webhook Alert (1)\",\"type\":\"webhook\",\"isDefault\":false,\"webhookURL\":\"https://sistema.smsnet.com.br/webhook/uptimekuma\",\"webhookContentType\":\"json\"}","active":true,"userId":1,"isDefault":false}]]
+433[{"ok":true,"msg":"Saved","id":1}]
+424["addNotification",{"name":"My Webhook Alert","type":"webhook","isDefault":false,"webhookURL":"https://sistema.smsnet.com.br/webhook/uptimekuma","webhookContentType":"json"},1]
+42["notificationList",[{"id":1,"name":"My Webhook Alert","config":"{\"name\":\"My Webhook Alert\",\"type\":\"webhook\",\"isDefault\":false,\"webhookURL\":\"https://sistema.smsnet.com.br/webhook/uptimekuma\",\"webhookContentType\":\"json\"}","active":true,"userId":1,"isDefault":false}]]
+434[{"ok":true,"msg":"Saved","id":1}]
+425["testNotification",{"name":"My Webhook Alert","type":"webhook","isDefault":false,"webhookURL":"https://sistema.smsnet.com.br/webhook/uptimekuma","webhookContentType":"json"}]
+435[{"ok":false,"msg":"Error: AxiosError: Request failed with status code 404 {\"message\":\"\"}"}]
+429["testNotification",{"name":"My Webhook Alert","type":"webhook","isDefault":false,"webhookURL":"https://enlxt3ab2nto.x.pipedream.net","webhookContentType":"json"}]
+439[{"ok":true,"msg":"Sent Successfully."}]
+4210["deleteNotification",1]
+42["notificationList",[]]
+4310[{"ok":true,"msg":"Deleted"}]

@@ -29,6 +29,7 @@ type Event struct {
 	Token     *string `json:"token,omitempty"`
 	Msg       *string `json:"msg,omitempty"`
 	MonitorId *int    `json:"monitorId,omitempty"`
+	ID        *int    `json:"id,omitempty"`
 	Tag       *Tag    `json:"tag"`
 	Tags      *[]Tag  `json:"tags"`
 }
@@ -38,6 +39,32 @@ type Tag struct {
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
+
+type Notification struct {
+	Id        *int   `json:"id"`
+	Name      string `json:"name"`
+	Config    string `json:"config"`
+	Active    bool   `json:"active"`
+	UserId    int    `json:"userId"`
+	IsDefault bool   `json:"isDefault"`
+}
+
+//type NotificationConfig struct {
+//	Name               string `json:"name"`
+//	Type               string `json:"type"`
+//	IsDefault          bool   `json:"isDefault"`
+//	WebhookURL         string `json:"webhookURL"`
+//	WebhookContentType string `json:"webhookContentType"`
+//}
+//
+//func (nc *NotificationConfig) UnmarshalJSON(data []byte) error {
+//	var jsonString string
+//	if err := json.Unmarshal(data, &jsonString); err != nil {
+//		return err
+//	}
+//	type C NotificationConfig
+//	return json.Unmarshal([]byte(jsonString), (*C)(nc))
+//}
 
 func NewMonitor() Monitor {
 	return Monitor{

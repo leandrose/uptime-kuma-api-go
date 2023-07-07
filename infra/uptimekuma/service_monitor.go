@@ -11,8 +11,9 @@ import (
 
 func (s *uptimekumaService) OnMonitorList(args ...interface{}) {
 	_ = s.fill(args[0], &s.monitors)
-	logrus.Debugf("OnMonitorList count monitors: %d", len(s.monitors))
-	logrus.Tracef("OnMonitorList: %+v", s.monitors)
+	log := logrus.WithField("func", "OnMonitorList")
+	log.Debugf("count monitors: %d", len(s.monitors))
+	log.Tracef("monitors: %+v", s.monitors)
 }
 
 func (s *uptimekumaService) GetMonitors() []entities.Monitor {

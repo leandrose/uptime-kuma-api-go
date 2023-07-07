@@ -13,106 +13,123 @@ service. It is built using the Go programming language (Golang).
 # Support
 
 ## API Key List
+
 | Resource | Method | Support? |
 |----------|--------|----------|
-| API Key  | GET    | ❌      |
+| API Key  | GET    | ❌        |
 
 ## Cert Info
+
 | Resource      | Method | Support? |
 |---------------|--------|----------|
-| Get Cert Info | GET    | ❌      |
+| Get Cert Info | GET    | ❌        |
 
 ## Docker Host List
+
 | Resource    | Method | Support? |
 |-------------|--------|----------|
-| Docker Host | GET    | ❌      |
+| Docker Host | GET    | ❌        |
 
 ## Heartbeat List
+
 | Resource   | Method | Support? |
 |------------|--------|----------|
-| Heartbeat  | GET    | ❌      |
-| Heartbeats | GET    | ❌      |
+| Heartbeat  | GET    | ❌        |
+| Heartbeats | GET    | ❌        |
 
 ## Important Heartbeat List
+
 | Resource             | Method | Support? |
 |----------------------|--------|----------|
-| Important Heartbeat  | GET    | ❌      |
-| Important Heartbeats | GET    | ❌      |
+| Important Heartbeat  | GET    | ❌        |
+| Important Heartbeats | GET    | ❌        |
 
 ## Info
+
 | Resource | Method | Support? |
 |----------|--------|----------|
-| Get Info | GET    | ✅️      |
+| Get Info | GET    | ✅️       |
 
 ## Maintenance List
+
 | Resource                | Method | Support? |
 |-------------------------|--------|----------|
-| Get Maintenances        | GET    | ❌      |
-| Create Maintenance      | POST   | ❌      |
-| Get Maintenance         | GET    | ❌      |
-| Delete Maintenance      | DELETE | ❌      |
-| Update Maintenance      | PATCH  | ❌      |
-| Pause Maintenance       | POST   | ❌      |
-| Resume Maintenance      | POST   | ❌      |
-| Add Monitor Maintenance | GET    | ❌      |
-| Add Monitor Maintenance | POST   | ❌      |
+| Get Maintenances        | GET    | ❌        |
+| Create Maintenance      | POST   | ❌        |
+| Get Maintenance         | GET    | ❌        |
+| Delete Maintenance      | DELETE | ❌        |
+| Update Maintenance      | PATCH  | ❌        |
+| Pause Maintenance       | POST   | ❌        |
+| Resume Maintenance      | POST   | ❌        |
+| Add Monitor Maintenance | GET    | ❌        |
+| Add Monitor Maintenance | POST   | ❌        |
 
 ## Monitor List
+
 | Resource           | Method | Support? |
 |--------------------|--------|----------|
-| Get All Monitors   | GET    | ✅️      |
-| Create Monitor     | POST   | ✅️      |
-| Get Monitor        | GET    | ✅️      |
-| Delete Monitor     | DELETE | ✅️      |
-| Update Monitor     | PATCH  | ✅️      |
-| Pause Monitor      | PATCH  | ✅️      |
-| Resume Monitor     | PATCH  | ✅️      |
-| Monitor Beats      | GET    | ❌      |
-| Add Tag Monitor    | POST   | ✅️      |
-| Remove Tag Monitor | DELETE | ✅️      |
+| Get All Monitors   | GET    | ✅️       |
+| Create Monitor     | POST   | ✅️       |
+| Get Monitor        | GET    | ✅️       |
+| Delete Monitor     | DELETE | ✅️       |
+| Update Monitor     | PATCH  | ✅️       |
+| Pause Monitor      | PATCH  | ✅️       |
+| Resume Monitor     | PATCH  | ✅️       |
+| Monitor Beats      | GET    | ❌        |
+| Add Tag Monitor    | POST   | ✅️       |
+| Remove Tag Monitor | DELETE | ✅️       |
 
 ## Notification List
-| Resource | Method | Support? |
-|----------|--------|----------|
+
+| Resource            | Method | Support? |
+|---------------------|--------|----------|
+| Get Notifications   | GET    | ✅️        |
+| Create Notification | GET    | ✅️        |
+| Delete Notification | GET    | ✅️        |
 
 ## Ping Average
+
 | Resource             | Method | Support? |
 |----------------------|--------|----------|
-| Get All Ping Average | GET    | ✅️      |
-| Get Ping Average     | GET    | ✅️      |
+| Get All Ping Average | GET    | ✅️       |
+| Get Ping Average     | GET    | ✅️       |
 
 ## Proxy List
+
 | Resource | Method | Support? |
 |----------|--------|----------|
 
 ## Status Page List
+
 | Resource             | Method | Support? |
 |----------------------|--------|----------|
-| Get All Status Pages | GET    | ❌      |
-| Add Status Page      | POST   | ❌      |
-| Get Status Page      | GET    | ❌      |
-| Save Status Page     | POST   | ❌      |
-| Delete Status Page   | DELETE | ❌      |
-| Post Incident        | POST   | ❌      |
-| Unpin Incident       | DELETE | ❌      |
+| Get All Status Pages | GET    | ❌        |
+| Add Status Page      | POST   | ❌        |
+| Get Status Page      | GET    | ❌        |
+| Save Status Page     | POST   | ❌        |
+| Delete Status Page   | DELETE | ❌        |
+| Post Incident        | POST   | ❌        |
+| Unpin Incident       | DELETE | ❌        |
 
 ## Uptime
+
 | Resource    | Method | Support? |
 |-------------|--------|----------|
-| Get Uptime  | GET    | ✅️      |
-| Get Uptimes | GET    | ✅️      |
+| Get Uptime  | GET    | ✅️       |
+| Get Uptimes | GET    | ✅️       |
 
 ## Tags
+
 | Resource   | Method | Support? |
 |------------|--------|----------|
-| Get Tags   | GET    | ✅️      |
-| Add Tag    | POST   | ✅️      |
-| Get Tag    | GET    | ✅️      |
-| Delete Tag | DELETE | ✅️      |
+| Get Tags   | GET    | ✅️       |
+| Add Tag    | POST   | ✅️       |
+| Get Tag    | GET    | ✅️       |
+| Delete Tag | DELETE | ✅️       |
 
 # Contributing
 
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, 
+Contributions are welcome! If you have any ideas, suggestions, or bug reports,
 please open an issue or submit a pull request.
 
 # License
