@@ -146,3 +146,51 @@ func MonitorResumeHandle(c echo.Context) error {
 
 	return http.SuccessPresenter(c.Response())
 }
+
+func MonitorTagAddHandle(c echo.Context) error {
+	monitorID, err := strconv.Atoi(c.Param("monitor_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+	tagID, err := strconv.Atoi(c.Param("tag_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	err = container.Resolve(&service)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	err = service.AddTagInMonitor(monitorID, tagID)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}
+
+func MonitorTagDeleteHandle(c echo.Context) error {
+	monitorID, err := strconv.Atoi(c.Param("monitor_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+	tagID, err := strconv.Atoi(c.Param("tag_id"))
+	if err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	err = container.Resolve(&service)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	err = service.DeleteTagInMonitor(monitorID, tagID)
+	if err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}

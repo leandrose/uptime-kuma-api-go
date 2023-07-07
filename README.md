@@ -68,8 +68,8 @@ service. It is built using the Go programming language (Golang).
 | Pause Monitor      | PATCH  | ✅️      |
 | Resume Monitor     | PATCH  | ✅️      |
 | Monitor Beats      | GET    | ❌      |
-| Add Tag Monitor    | POST   | ❌      |
-| Remove Tag Monitor | DELETE | ❌      |
+| Add Tag Monitor    | POST   | ✅️      |
+| Remove Tag Monitor | DELETE | ✅️      |
 
 ## Notification List
 | Resource | Method | Support? |

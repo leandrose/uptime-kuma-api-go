@@ -177,3 +177,63 @@ func (s *uptimekumaService) PauseMonitor(monitorID int) error {
 
 	return errors.New("error occurred")
 }
+
+func (s *uptimekumaService) AddTagInMonitor(monitorID, tagID int) error {
+	// 429["addMonitorTag",1,10,""]
+	// 439[{"ok":true,"msg":"Added Successfully."}]
+	log := logrus.WithField("func", "AddTagInMonitor")
+	m := []interface{}{
+		"addMonitorTag",
+		tagID,
+		monitorID,
+		"",
+	}
+	b, _ := json.Marshal(m)
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Error("error: %s", err)
+		return err
+	}
+
+	select {
+	case ok := <-c:
+		if ok.Ok {
+			return nil
+		}
+	case <-time.After(5 * time.Second):
+		log.Errorf("expired request monitor=%s", monitorID)
+		return errors.New("expired request")
+	}
+
+	return errors.New("error occurred")
+}
+
+func (s *uptimekumaService) DeleteTagInMonitor(monitorID, tagID int) error {
+	// 4213["deleteMonitorTag",1,10,""]
+	// 4313[{"ok":true,"msg":"Deleted Successfully."}]
+	log := logrus.WithField("func", "DeleteTagInMonitor")
+	m := []interface{}{
+		"deleteMonitorTag",
+		tagID,
+		monitorID,
+		"",
+	}
+	b, _ := json.Marshal(m)
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Error("error: %s", err)
+		return err
+	}
+
+	select {
+	case ok := <-c:
+		if ok.Ok {
+			return nil
+		}
+	case <-time.After(5 * time.Second):
+		log.Errorf("expired request monitor=%s", monitorID)
+		return errors.New("expired request")
+	}
+
+	return errors.New("error occurred")
+}
