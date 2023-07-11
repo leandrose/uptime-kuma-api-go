@@ -25,14 +25,15 @@ type Login struct {
 }
 
 type Event struct {
-	Ok        bool        `json:"ok"`
-	Token     *string     `json:"token,omitempty"`
-	Msg       *string     `json:"msg,omitempty"`
-	MonitorId *int        `json:"monitorId,omitempty"`
-	ID        *int        `json:"id,omitempty"`
-	Tag       *Tag        `json:"tag"`
-	Tags      *[]Tag      `json:"tags"`
-	Config    *StatusPage `json:"config"`
+	Ok        bool                `json:"ok"`
+	Token     *string             `json:"token,omitempty"`
+	Msg       *string             `json:"msg,omitempty"`
+	MonitorId *int                `json:"monitorId,omitempty"`
+	ID        *int                `json:"id,omitempty"`
+	Tag       *Tag                `json:"tag"`
+	Tags      *[]Tag              `json:"tags"`
+	Incident  *StatusPageIncident `json:"incident"`
+	Config    *StatusPage         `json:"config"`
 }
 
 type Tag struct {
@@ -166,6 +167,15 @@ type Monitor struct {
 	TlsCa                    *string  `json:"tlsCa,omitempty"`
 	TlsCert                  *string  `json:"tlsCert,omitempty"`
 	TlsKey                   *string  `json:"tlsKey,omitempty"`
+}
+
+type StatusPageIncident struct {
+	Id          *int    `json:"id,omitempty"`
+	Style       string  `json:"style"`
+	Title       string  `json:"title"`
+	Content     string  `json:"content"`
+	Pin         *bool   `json:"pin,omitempty"`
+	CreatedDate *string `json:"createdDate,omitempty"`
 }
 
 type StatusPage struct {

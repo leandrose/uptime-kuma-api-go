@@ -45,6 +45,9 @@ func LoadRouters(e *echo.Echo) {
 	ess.GET("", handlers.StatusPageGetHandle)
 	ess.POST("", handlers.StatusPageUpdateHandle)
 	ess.DELETE("", handlers.StatusPageDeleteHandle)
+	// STATUS PAGE INCIDENT
+	ess.POST("/incident", handlers.StatusPageCreateIncidentHandle)
+	ess.DELETE("/incident", handlers.StatusPageRemoveIncidentHandle)
 	// TAGS
 	e.GET("/tags", handlers.TagsGetHandle)
 	e.POST("/tags", handlers.TagCreateHandle)

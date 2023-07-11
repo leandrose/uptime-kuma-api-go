@@ -166,3 +166,62 @@ func (s *uptimekumaService) UpdateStatusPage(slug string, statusPage entities.St
 		return nil, errors.New("expired request")
 	}
 }
+
+func (s *uptimekumaService) PinIncidentStatusPage(slug string, incident entities.StatusPageIncident) (*entities.StatusPageIncident, error) {
+	// 422["postIncident","a5d759ca-ca70-47fa-bcce-99917edee809",{"title":"a","content":"b","style":"primary"}]
+	// 432[{"ok":true,"incident":{"id":12,"style":"primary","title":"a","content":"b","pin":true,"createdDate":"2023-07-11 18:34:15"}}]
+	log := logrus.WithField("func", "PinIncidentStatusPage")
+	b, _ := json.Marshal([]interface{}{
+		"postIncident",
+		slug,
+		incident,
+	})
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Errorf("error WriteText: %s", err)
+		return nil, err
+	}
+
+	select {
+	case ok := <-c:
+		log.Debugf("ok: %+v", ok)
+		if ok.Ok {
+			b, _ := json.Marshal(*ok.Incident)
+			log.Debugf("ok.Incident: %s", string(b))
+			return ok.Incident, nil
+		} else {
+			return nil, errors.New(*ok.Msg)
+		}
+	case <-time.After(5 * time.Second):
+		log.Error("expired request")
+		return nil, errors.New("expired request")
+	}
+}
+
+func (s *uptimekumaService) UnpinIncidentStatusPage(slug string) error {
+	// 422["unpinIncident","a5d759ca-ca70-47fa-bcce-99917edee809"]
+	// 432[{"ok":true}]
+	log := logrus.WithField("func", "UnpinIncidentStatusPage")
+	b, _ := json.Marshal([]interface{}{
+		"unpinIncident",
+		slug,
+	})
+	c, err := s.conn.WriteText(s.ctx, b)
+	if err != nil {
+		log.Errorf("error WriteText: %s", err)
+		return err
+	}
+
+	select {
+	case ok := <-c:
+		log.Debugf("ok: %+v", ok)
+		if ok.Ok {
+			return nil
+		} else {
+			return errors.New(*ok.Msg)
+		}
+	case <-time.After(5 * time.Second):
+		log.Error("expired request")
+		return errors.New("expired request")
+	}
+}

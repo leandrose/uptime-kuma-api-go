@@ -92,3 +92,11 @@
 431[{"ok":true,"msg":"OK!"}]
 422["saveStatusPage","slug",{"id":3,"slug":"slug","title":"name","description":"DescriÃ§Ã£o","icon":"/icon.svg","theme":"light","published":true,"showTags":false,"domainNameList":["example.com","uol.com"],"customCSS":"body {\n  \n}\n","footerText":"Footer Text","showPoweredBy":true,"googleAnalyticsId":"Google Analytics ID"},"/icon.svg",[]]
 432[{"ok":true,"publicGroupList":[]}]
+
+# status page incident
+# pin
+422["postIncident","a5d759ca-ca70-47fa-bcce-99917edee809",{"title":"a","content":"b","style":"primary"}]
+432[{"ok":true,"incident":{"id":12,"style":"primary","title":"a","content":"b","pin":true,"createdDate":"2023-07-11 18:34:15"}}]
+# unpin
+422["unpinIncident","a5d759ca-ca70-47fa-bcce-99917edee809"]
+432[{"ok":true}]

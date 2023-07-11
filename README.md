@@ -106,8 +106,8 @@ service. It is built using the Go programming language (Golang).
 | Get Status Page      | GET    | ✅️       |
 | Save Status Page     | POST   | ✅️       |
 | Delete Status Page   | DELETE | ✅️       |
-| Post Incident        | POST   | ❌        |
-| Unpin Incident       | DELETE | ❌        |
+| Post Incident        | POST   | ✅️       |
+| Unpin Incident       | DELETE | ✅️       |
 
 ## Uptime
 

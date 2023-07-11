@@ -180,3 +180,51 @@ func StatusPageDeleteHandle(c echo.Context) error {
 
 	return http.SuccessPresenter(c.Response())
 }
+
+func StatusPageCreateIncidentHandle(c echo.Context) error {
+	paramDto := struct {
+		Slug    string `param:"slug"`
+		Style   string `json:"style"`
+		Title   string `json:"title"`
+		Content string `json:"content"`
+	}{}
+	if err := c.Bind(&paramDto); err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	if err := container.Resolve(&service); err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	incident := entities.StatusPageIncident{
+		Style:   paramDto.Style,
+		Title:   paramDto.Title,
+		Content: paramDto.Content,
+	}
+	if _, err := service.PinIncidentStatusPage(paramDto.Slug, incident); err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}
+
+func StatusPageRemoveIncidentHandle(c echo.Context) error {
+	paramDto := struct {
+		Slug string `param:"slug"`
+	}{}
+	if err := c.Bind(&paramDto); err != nil {
+		return http.Error400Presenter(c.Response(), err)
+	}
+
+	var service uptimekuma.IUptimeKumaService
+	if err := container.Resolve(&service); err != nil {
+		return http.Error500Presenter(c.Response(), errors.New("failed instance service IUptimeKumaService"))
+	}
+
+	if err := service.UnpinIncidentStatusPage(paramDto.Slug); err != nil {
+		return http.Error500Presenter(c.Response(), err)
+	}
+
+	return http.SuccessPresenter(c.Response())
+}
