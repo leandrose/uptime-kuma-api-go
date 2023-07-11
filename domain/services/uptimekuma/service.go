@@ -31,7 +31,7 @@ type IUptimeKumaService interface {
 	GetStatusPage(string) (*entities.StatusPage, error)
 	DeleteStatusPage(string) error
 	CreateStatusPage(entities.StatusPage) (*entities.StatusPage, error)
-	UpdateStatusPage(string, entities.StatusPage) (*entities.StatusPage, error)
+	UpdateStatusPage(string, entities.StatusPage, []entities.PublicGroupList) (*entities.StatusPage, error)
 	// TAGS
 	GetTag(int) (*entities.Tag, error)
 	GetTags() (*[]entities.Tag, error)

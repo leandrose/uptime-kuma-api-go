@@ -101,18 +101,19 @@ func StatusPagesCreateHandle(c echo.Context) error {
 
 func StatusPageUpdateHandle(c echo.Context) error {
 	dto := struct {
-		Slug              string    `param:"slug"`
-		Title             string    `json:"title"`
-		Description       *string   `json:"description"`
-		Icon              *string   `json:"icon"`
-		Theme             *string   `json:"theme"`
-		Published         *bool     `json:"published"`
-		ShowTags          *bool     `json:"showTags"`
-		DomainNameList    *[]string `json:"domainNameList"`
-		CustomCSS         *string   `json:"customCSS"`
-		FooterText        *string   `json:"footerText"`
-		ShowPoweredBy     *bool     `json:"showPoweredBy"`
-		GoogleAnalyticsId *string   `json:"googleAnalyticsId"`
+		Slug              string                     `param:"slug"`
+		Title             string                     `json:"title"`
+		Description       *string                    `json:"description"`
+		Icon              *string                    `json:"icon"`
+		Theme             *string                    `json:"theme"`
+		Published         *bool                      `json:"published"`
+		ShowTags          *bool                      `json:"showTags"`
+		DomainNameList    *[]string                  `json:"domainNameList"`
+		CustomCSS         *string                    `json:"customCSS"`
+		FooterText        *string                    `json:"footerText"`
+		ShowPoweredBy     *bool                      `json:"showPoweredBy"`
+		GoogleAnalyticsId *string                    `json:"googleAnalyticsId"`
+		PublicGroupList   []entities.PublicGroupList `json:"monitors"`
 	}{}
 	sp := entities.StatusPage{}
 	sp.Init()
@@ -152,7 +153,7 @@ func StatusPageUpdateHandle(c echo.Context) error {
 	statuspage.ShowPoweredBy = dto.ShowPoweredBy
 	statuspage.GoogleAnalyticsId = dto.GoogleAnalyticsId
 
-	sp2, err := service.UpdateStatusPage(dto.Slug, *statuspage)
+	sp2, err := service.UpdateStatusPage(dto.Slug, *statuspage, dto.PublicGroupList)
 	if err != nil {
 		return http.Error500Presenter(c.Response(), err)
 	}

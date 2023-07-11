@@ -184,6 +184,13 @@ type StatusPage struct {
 	GoogleAnalyticsId *string   `json:"googleAnalyticsId"`
 }
 
+type PublicGroupList struct {
+	Name        string `json:"name"`
+	MonitorList []struct {
+		Id int `json:"id"`
+	} `json:"monitorList"`
+}
+
 func (sp *StatusPage) Init() {
 	bf := false
 	sicon := "/icon.svg"

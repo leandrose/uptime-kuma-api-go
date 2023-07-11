@@ -131,7 +131,7 @@ func (s *uptimekumaService) DeleteStatusPage(slug string) error {
 	}
 }
 
-func (s *uptimekumaService) UpdateStatusPage(slug string, statusPage entities.StatusPage) (*entities.StatusPage, error) {
+func (s *uptimekumaService) UpdateStatusPage(slug string, statusPage entities.StatusPage, monitors []entities.PublicGroupList) (*entities.StatusPage, error) {
 	// 422["saveStatusPage","slug",{"id":3,"slug":"slug","title":"name","description":"DescriÃ§Ã£o","icon":"/icon.svg","theme":"light","published":true,"showTags":false,"domainNameList":["example.com","uol.com"],"customCSS":"body {\n  \n}\n","footerText":"Footer Text","showPoweredBy":true,"googleAnalyticsId":"Google Analytics ID"},"/icon.svg",[]]
 	// 432[{"ok":true,"publicGroupList":[]}]
 	log := logrus.WithField("func", "DeleteStatusPage")
@@ -140,7 +140,7 @@ func (s *uptimekumaService) UpdateStatusPage(slug string, statusPage entities.St
 		slug,
 		statusPage,
 		statusPage.Icon,
-		[]string{},
+		monitors,
 	})
 	c, err := s.conn.WriteText(s.ctx, b)
 	if err != nil {
