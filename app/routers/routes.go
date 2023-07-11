@@ -37,6 +37,14 @@ func LoadRouters(e *echo.Echo) {
 	// UPTIME
 	e.GET("/uptimes", handlers.UptimesHandle)
 	e.GET("/uptime/:monitor_id", handlers.UptimeHandle)
+	// STATUS PAGES
+	es := e.Group("/statuspages")
+	es.GET("", handlers.StatusPagesGetHandle)
+	es.POST("", handlers.StatusPagesCreateHandle)
+	ess := es.Group("/:slug")
+	ess.GET("", handlers.StatusPageGetHandle)
+	ess.POST("", handlers.StatusPageUpdateHandle)
+	ess.DELETE("", handlers.StatusPageDeleteHandle)
 	// TAGS
 	e.GET("/tags", handlers.TagsGetHandle)
 	e.POST("/tags", handlers.TagCreateHandle)

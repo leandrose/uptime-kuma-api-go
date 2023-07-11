@@ -101,11 +101,11 @@ service. It is built using the Go programming language (Golang).
 
 | Resource             | Method | Support? |
 |----------------------|--------|----------|
-| Get All Status Pages | GET    | ❌        |
-| Add Status Page      | POST   | ❌        |
-| Get Status Page      | GET    | ❌        |
-| Save Status Page     | POST   | ❌        |
-| Delete Status Page   | DELETE | ❌        |
+| Get All Status Pages | GET    | ✅️       |
+| Add Status Page      | POST   | ✅️       |
+| Get Status Page      | GET    | ✅️       |
+| Save Status Page     | POST   | ✅️       |
+| Delete Status Page   | DELETE | ✅️       |
 | Post Incident        | POST   | ❌        |
 | Unpin Incident       | DELETE | ❌        |
 

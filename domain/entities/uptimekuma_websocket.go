@@ -25,13 +25,14 @@ type Login struct {
 }
 
 type Event struct {
-	Ok        bool    `json:"ok"`
-	Token     *string `json:"token,omitempty"`
-	Msg       *string `json:"msg,omitempty"`
-	MonitorId *int    `json:"monitorId,omitempty"`
-	ID        *int    `json:"id,omitempty"`
-	Tag       *Tag    `json:"tag"`
-	Tags      *[]Tag  `json:"tags"`
+	Ok        bool        `json:"ok"`
+	Token     *string     `json:"token,omitempty"`
+	Msg       *string     `json:"msg,omitempty"`
+	MonitorId *int        `json:"monitorId,omitempty"`
+	ID        *int        `json:"id,omitempty"`
+	Tag       *Tag        `json:"tag"`
+	Tags      *[]Tag      `json:"tags"`
+	Config    *StatusPage `json:"config"`
 }
 
 type Tag struct {
@@ -165,4 +166,32 @@ type Monitor struct {
 	TlsCa                    *string  `json:"tlsCa,omitempty"`
 	TlsCert                  *string  `json:"tlsCert,omitempty"`
 	TlsKey                   *string  `json:"tlsKey,omitempty"`
+}
+
+type StatusPage struct {
+	Id                *int      `json:"id,omitempty"`
+	Slug              string    `json:"slug"`
+	Title             string    `json:"title"`
+	Description       *string   `json:"description"`
+	Icon              *string   `json:"icon"`
+	Theme             *string   `json:"theme"`
+	Published         *bool     `json:"published"`
+	ShowTags          *bool     `json:"showTags"`
+	DomainNameList    *[]string `json:"domainNameList"`
+	CustomCSS         *string   `json:"customCSS"`
+	FooterText        *string   `json:"footerText"`
+	ShowPoweredBy     *bool     `json:"showPoweredBy"`
+	GoogleAnalyticsId *string   `json:"googleAnalyticsId"`
+}
+
+func (sp *StatusPage) Init() {
+	bf := false
+	sicon := "/icon.svg"
+	stheme := "light"
+
+	sp.Published = &bf
+	sp.ShowTags = &bf
+	sp.ShowPoweredBy = &bf
+	sp.Icon = &sicon
+	sp.Theme = &stheme
 }

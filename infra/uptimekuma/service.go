@@ -24,6 +24,7 @@ type uptimekumaService struct {
 	uptimes       map[int]map[int]float64
 	notifications []entities.Notification
 	heartbeatList map[int][]entities.Heartbeat
+	statusPages   map[int]entities.StatusPage
 
 	chanAuth chan bool
 }
@@ -50,6 +51,7 @@ func NewUptimeKumaService() *uptimekuma.IUptimeKumaService {
 			"uptime":           instance.OnUptime,
 			"notificationList": instance.OnNotificationList,
 			"heartbeatList":    instance.OnHeartbeatList,
+			"statusPageList":   instance.OnStatusPageList,
 		},
 		cancel: cancel,
 		log: logrus.WithFields(logrus.Fields{
