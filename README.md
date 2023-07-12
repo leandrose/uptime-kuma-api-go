@@ -10,6 +10,60 @@ service. It is built using the Go programming language (Golang).
 - Install the dependencies: go install
 - Run: go build main serve
 
+# How to use this image
+
+## Start a ```uptime-kuma-api-go``` server instance
+
+Starting a Uptime Kuma Api GO instance is simple:
+
+```$ docker run --name uptimekuma-api-go leandrose/uptime-kuma-api-go:latest```
+
+## via docker-compose
+
+Example docker-compose.yaml:
+
+```
+version: '3'
+
+services:
+    uptimekumaapi:
+        image: leandrose/uptime-kuma-api-go:latest
+        environment:
+            UPTIMEKUMA_URI: wss://DOMAIN/socket.io/?EIO=4&transport=websocket
+            UPTIMEKUMA_USERNAME: user
+            UPTIMEKUMA_PASSWORD: pass
+        ports:
+            - 3000:3000
+        restart: always
+
+```
+
+# Environment Variables
+
+### UPTIMEKUMA_URI
+
+The UPTIMEKUMA_URI environment variable represents the URI of the WebSocket connection
+for UptimeKuma. It defines the endpoint where the client application will establish a
+connection to the UptimeKuma server.
+
+Example usage:
+
+```
+UPTIMEKUMA_URI=wss://DOMAIN/socket.io/?EIO=4&transport=websocket
+```
+
+### UPTIMEKUMA_USERNAME
+
+The UPTIMEKUMA_USERNAME environment variable is used to specify the username for
+accessing the UptimeKuma WebSocket. It is the credential used by the client application
+to authenticate and interact with the UptimeKuma server.
+
+### UPTIMEKUMA_PASSWORD
+
+The UPTIMEKUMA_PASSWORD environment variable is used to set the password for accessing
+the UptimeKuma WebSocket. It works in conjunction with the UPTIMEKUMA_USERNAME to
+authenticate the client application with the UptimeKuma server.
+
 # Support
 
 ## API Key List
