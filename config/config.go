@@ -59,7 +59,6 @@ func loadVariables() (err error) {
 	config.Database.Password = os.Getenv("DATABASE_PASSWORD")
 
 	config.UptimeKuma.Uri = os.Getenv("UPTIMEKUMA_URI")
-	config.UptimeKuma.Host = os.Getenv("UPTIMEKUMA_HOST")
 	config.UptimeKuma.Username = os.Getenv("UPTIMEKUMA_USERNAME")
 	config.UptimeKuma.Password = os.Getenv("UPTIMEKUMA_PASSWORD")
 
